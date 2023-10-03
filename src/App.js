@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+
 import './App.css';
 
+import Navbar from './container/Navbar';
+import Page from './container/Page';
+import Vehicle from './container/Vehicle';
+import {BrowserRouter as Router 
+} from  'react-router-dom';
+import { useState } from 'react';
+
+
+
 function App() {
+  const [currentPage, setCurrentPage]= useState(1);
+  const [searchValue, setSearchValue] = useState('')
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+
+      <Navbar setSearchValue={setSearchValue}/>
+      <Vehicle currentPage={currentPage} searchValue={searchValue}/>
+     <Page totalItems={25} currentPage={currentPage} onPageChange={setCurrentPage} />
+      </Router>
     </div>
   );
 }
